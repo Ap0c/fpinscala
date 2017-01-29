@@ -159,7 +159,7 @@ object PolymorphicFunctions {
     def loop (idx: Int): Boolean = {
 
       if (idx + 1 == as.length) true
-      else if (!ordered(as(idx), as(idx + 1))) false
+      else if (!gt(as(idx), as(idx + 1))) false
       else loop(idx + 1)
 
     }
@@ -179,7 +179,7 @@ object PolymorphicFunctions {
   // Note that `=>` associates to the right, so we could
   // write the return type as `A => B => C`
   def curry[A,B,C](f: (A, B) => C): A => (B => C) =
-    ???
+    (a: A) => (b: B) => f(a, b)
 
   // NB: The `Function2` trait has a `curried` method already
 
