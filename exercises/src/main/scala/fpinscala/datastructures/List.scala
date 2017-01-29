@@ -60,6 +60,7 @@ object List { // `List` companion object. Contains functions for creating and wo
     case Cons(_, t) => Cons(h, t)
   }
 
+  @annotation.tailrec
   def drop[A](l: List[A], n: Int): List[A] = {
 
     if (n == 0) l
@@ -70,7 +71,12 @@ object List { // `List` companion object. Contains functions for creating and wo
 
   }
 
-  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = ???
+  @annotation.tailrec
+  def dropWhile[A](l: List[A], f: A => Boolean): List[A] = l match {
+    case Nil => Nil
+    case Cons(h, _) if !f(h) => l
+    case Cons(_, t) => dropWhile(t, f)
+  }
 
   def init[A](l: List[A]): List[A] = ???
 
